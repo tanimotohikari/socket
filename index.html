@@ -43,7 +43,7 @@
       <option value="room-2">Room 2</option>
     </select>
     <input class="btn-select" type="submit" value="select">
-    <ul class='clearfix'>
+    <ul class='area is-hide clearfix'>
       <label>
         <li id="1" class="karuta">
           <span class="karuta-card">
@@ -92,8 +92,11 @@
       });
 
       socket.on('emit_from_server', function(data){
-        $('#logs').append($('<li>').text('【' + data.room + '】'));
-        $('#' + data).addClass('is-select');
+        if(data){
+          $('.area').removeClass('is-hide');
+        }
+        //$('#logs').append($('<li>').text('【' + data.room + '】'));
+        //$('#' + data).addClass('is-select');
       })
 
     });

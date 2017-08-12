@@ -1,0 +1,26 @@
+{
+  "name": "socket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "socket.io": "^2.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://tanimotohikari@github.com/tanimotohikari/socket.git"
+  },
+  "engines": {
+   "node": "v4.6.0"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tanimotohikari/socket/issues"
+  },
+  "homepage": "https://github.com/tanimotohikari/socket#readme"
+}
