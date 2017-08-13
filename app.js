@@ -1,19 +1,29 @@
-var app = require('http').createServer(handler),
-    io = require('socket.io').listen(app),
-    fs = require('fs');
-app.listen(1337);
-     
-function handler(req, res) {
-  fs.readFile(__dirname + '/index.html', function(err, data) {
-    if(err) {
-      res.writeHead(500);
-      return res.end('Error');
-    }
-    res.writeHead(200);
-    res.write(data);
-    res.end();
-  })
-}
+const express = require('express');
+const socketIO = require('socket.io');
+const path = require('path');
+
+const PORT = process.env.PORT || 3000;
+const INDEX = path.join(__dirname, 'index.html');
+
+const server = express()
+  .use((req, res) => res.sendFile(INDEX) )
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+
+const io = socketIO(server);
+
+io.on('connection', (socket) => {
+  console.log('Client connected');
+  socket.on('disconnect', () => console.log('Client disconnected'));
+});
+
+setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
+
+var socket = io();
+var el = document.getElementById('server-time');
+
+socket.on('time', function(timeString) {
+  el.innerHTML = 'Server time: ' + timeString;
+});
   
 io.sockets.on('connection', function(socket){
   socket.on('emit_from_client', function(data){
